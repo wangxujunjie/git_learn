@@ -1,0 +1,66 @@
+ctrl+insert  拷贝	
+shift+insert  粘贴
+
+git config --list 查看所有配置
+
+git init   		初始化本地仓库
+注意：master分支和main分支是不一样的（本地和远程需保持一致，否则push不上去）
+git branch -M main   将分支改为main
+git branch	查看当前分支
+git remote add origin 仓库地址	将远程仓库和本地仓库绑定（一般先用HTTPS）
+git push -u origin master		推送本地仓库到远程仓库
+
+
+git status  		查看状态
+git add 文件   		将文件添加到暂存区
+git restore --staged 文件	将文件从暂存区拿出
+git reset HEAD 文件		将文件从暂存区拿出
+
+git commit -m ""		将暂存区文件上传
+合并写法：git commit -am ""   将add操作和commit合并在一起
+
+
+git log			查看历史提交
+git reflog			查看过去所有历史提交（因为回退版本后，git log只能看到当前版本及之前的记录）
+git log --pretty=online	查看历史提交（只展示一行）
+git log --graph --pretty=oneline	通过图表的方式来展示历史提交（可以看到分支合并）
+//回到过去
+git reset --hard HEAD^ 	回退到上一个版本（回退几次加几个^）
+git reset --hard HEAD~2	回退到上两个版本（回退几次数字就写几）
+//回到未来
+git reset --hrad 标识符	标识符只要写到所有都不一样的位数即可
+
+
+工作目录误删除解决办法
+cheakout 文件   	从本地仓库拉取回来
+git restore 文件   	撤销操作
+
+
+分支操作
+git branch     		查看所有分支 （*标记的是当前分支）
+git checkout 分支名		新建分支并切换到新建分支
+git branch -d 分支名		删除分支
+git merge 分支名		合并分支（必须在主分支进行该操作）
+（当出现多个分支修改同一文件位置时会出现冲突，这个时候需要手动修改）
+git branch -m/-M 旧分支名 新分支名	重命名分支，若新分支名已经存在，则需要用-M强制命名
+
+git fetch			同步远程分支最新的状态
+git branch -a 		查看本地与远程分支
+git push origin 分支名	推送本地分支到远程
+git push origin : 远程分支名	删除远程分支（本地分支还保留）
+git checkout -b local_branch origin/远程分支名
+
+
+git remote remove origin	解除远程仓库的绑定
+
+如何解决多人冲突：在push前，先pull远程的内容，若有冲突则手动解决，若没有在push
+
+
+标签（就是版本）
+git tag tag_name			新建标签，默认为HEAD
+git tag -a tag_name -m 'XXXX'	添加标签并指定标签描述信息
+git tag				查看所有标签
+git tag -d tag_name			删除一个本地标签
+git push origin :refs/tags/tag_name	推送一个远程标签
+git push origin tag_name		推送一个本地标签到远程
+git push origin --tags		推送所有未推送的本地标签到远程
